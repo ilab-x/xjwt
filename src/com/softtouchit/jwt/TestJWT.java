@@ -4,9 +4,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.Date;
 
-import jwt.JWT;
 import jwt.KEY;
 import net.sf.json.JSONObject;
 
