@@ -24,7 +24,6 @@ public class TestJWT {
 		System.out.println(data);
 
 		// =================示例：生成xjwt
-
 		JSONObject param=new JSONObject();
 		param.put("username","test");
 		param.put("issuerId",KEY.issueId.toString());
@@ -32,25 +31,23 @@ public class TestJWT {
 
 		data = encrty(json);
 		System.out.println(data);
-
+		
 	} catch (Exception e)
 	{
 		e.printStackTrace();
 	}
-
     }
     public static String dencrty(String xjwt) throws Exception {
     	//获取当前时间
-    	long now = new Date().getTime();
+    	long now = System.currentTimeMillis();
     	//创建JWT实例
         JWT jwt = new JWT(KEY.secret, KEY.aeskey,now,KEY.issueId);
         //对数据进行url 解码
         xjwt=URLDecoder.decode(xjwt,"UTF-8"); 
         //解密数据
-        String json = jwt.verifyAndDecrypt(xjwt,  now);
+        String json = jwt.verifyAndDecrypt(xjwt,now);
         return json;
     }
-    
     public static String encrty(String json) throws Exception {
 	//获取当前时间
 	long now=System.currentTimeMillis();
@@ -62,7 +59,7 @@ public class TestJWT {
 	//创建out
         ByteBuffer out = ByteBuffer.allocate(1024);
         //加密数据
-        jwt.encryptAndSign(JWT.Type.SYS,payload,out,now+60*60*1000);
+        jwt.encryptAndSign(JWT.Type.SYS,payload,out,now+10*60*1000); //设置过期时间，例:10分钟
         String xjwt = new String(out.array(),out.arrayOffset(),out.remaining());
         //对数据进行url 编码
         return URLEncoder.encode(xjwt,"UTF-8");
