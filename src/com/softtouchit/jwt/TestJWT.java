@@ -15,8 +15,8 @@ public class TestJWT {
 
     public static void main(String[] args)
     {
-		try
-		{
+	try
+	{
 		String data= "";
 		// =================示例：解密xjwt (token也是一个xjwt);
 		String xjwt = "AAABbUy0XxsCAAAAAAABiDA%3D.xPwVH6y5s7tALHu1W3z4zX9Moo5j3qHhHylUxL2lVFzRKDBzQpK1YmrohX2gKKVE.zxDXPoreJXv8N1BAtMUcceupBM8nf0UcWQx5j0u6Ao0%3D";
@@ -59,7 +59,7 @@ public class TestJWT {
 	//创建payload用来装数据
 	ByteBuffer payload = ByteBuffer.allocate(1024).order(ByteOrder.BIG_ENDIAN);
         payload.put(json.getBytes("UTF-8")).flip();
-		//创建out对象
+	//创建out对象
         ByteBuffer out = ByteBuffer.allocate(1024);
         //调用加密方法，加密数据
         jwt.encryptAndSign(JWT.Type.SYS,payload,out,now+60*60*1000);
