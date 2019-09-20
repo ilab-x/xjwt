@@ -44,9 +44,9 @@ public class TestJWT {
     	long now = new Date().getTime();
     	//创建JWT实例
         JWT jwt = new JWT(KEY.secret, KEY.aeskey,now,KEY.issueId);
-        //对数据进行url解码
+        //对数据进行url 解码
         xjwt=URLDecoder.decode(xjwt,"UTF-8"); 
-        //调用解密方法，解密数据
+        //解密数据
         String json = jwt.verifyAndDecrypt(xjwt,  now);
         return json;
     }
@@ -56,15 +56,15 @@ public class TestJWT {
 	long now=System.currentTimeMillis();
 	//创建JWT实例
 	JWT jwt=new JWT(KEY.secret,KEY.aeskey,now,KEY.issueId);
-	//创建payload用来装数据
+	//创建payload
 	ByteBuffer payload = ByteBuffer.allocate(1024).order(ByteOrder.BIG_ENDIAN);
         payload.put(json.getBytes("UTF-8")).flip();
-	//创建out对象
+	//创建out
         ByteBuffer out = ByteBuffer.allocate(1024);
-        //调用加密方法，加密数据
+        //加密数据
         jwt.encryptAndSign(JWT.Type.SYS,payload,out,now+60*60*1000);
         String xjwt = new String(out.array(),out.arrayOffset(),out.remaining());
-        //对数据进行url编码
+        //对数据进行url 编码
         return URLEncoder.encode(xjwt,"UTF-8");
     }
 }
